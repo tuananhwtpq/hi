@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public GameObject prefab;
     public float cooldown;
     public float timeShoot = 1.0f;
+    public float boundTop = 3.5f;
+    public float boundBottom = -4.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,8 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             rb.velocity = new Vector2(0, jumpForce);
+
+            
         }
         cooldown -= Time.deltaTime;
         if (cooldown <= 0.0f)
@@ -33,6 +37,20 @@ public class Player : MonoBehaviour
             PoolingManager.Instance.GetObject(NamePrefabPool.Bullet, parent: null, transform.position).Disable(1);
             cooldown = timeShoot;
         }
+        
+        var pos = transform.position;
+        if (pos.y >= boundTop)
+        {
+            transform.position = new Vector2(pos.x, boundTop);
+        }
+        else if (pos.y <= boundBottom)
+        {
+            transform.position = new Vector2(pos.x, boundBottom);
+        }
+        
+        
+        
+        
         
         
         

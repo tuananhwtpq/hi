@@ -8,4 +8,4 @@ PhysicsMaterial2D:
   m_PrefabAsset: {fileID: 0}
   m_Name: New Physics Material 2D
   friction: 0.46
-  bounciness: 1.57
+  bounciness: 1.7

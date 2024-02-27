@@ -8,7 +8,7 @@ using UnityEngine;
 public class Bullet : BasePooling
 {
     // Start is called before the first frame update
-    public float speed;
+    public float speed = 5.0f;
    public Rigidbody2D rb;
    public SpriteRenderer sr;
 
