@@ -36,9 +36,13 @@ public class Wall : BasePooling
 
         for (int i = 0; i < 4; i++)
         {
+            var blockType = (BlockType)Random.Range(0, 3);
             var position = transform.position;
             var block = (Block)PoolingManager.Instance.GetObject(NamePrefabPool.Block, 
                 position: new Vector3(position.x, posY[i], position.z), parent:transform);
+            //Lỗi sắp xếp sai dòng, phải gán block.blockType = blockType trước sau đó ms truy cập block.SetData();
+            block.blockType = blockType;
+            block.SetData();
            SpriteRenderer sr = block.gameObject.GetComponent<SpriteRenderer>();
             sr.size = new Vector2(1, height[i]);
             BoxCollider2D bc = block.gameObject.GetComponent<BoxCollider2D>();
@@ -54,5 +58,7 @@ public class Wall : BasePooling
     {
         transform.Translate(new Vector3(-speed *Time.deltaTime, transform.position.y, transform.position.z));
         //transform.position = new Vector3(-speed * Time.deltaTime, transform.position.y, transform.position.z);
+        
+        
     }
 }

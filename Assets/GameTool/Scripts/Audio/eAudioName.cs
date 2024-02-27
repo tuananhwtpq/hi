@@ -3,6 +3,9 @@ namespace GameTool
     public enum eMusicName
     {
         None,
+        Splash,
+        Lobby,
+        Game,
     }
     public enum eSoundName
     {

@@ -11,6 +11,8 @@ public class Bullet : BasePooling
     public float speed = 5.0f;
    public Rigidbody2D rb;
    public SpriteRenderer sr;
+   //Mới thêm vào ngày 27/2
+   public float damage = 1.0f;
 
    private void Start()
    {
