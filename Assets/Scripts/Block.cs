@@ -7,7 +7,10 @@ using UnityEngine;
 public class Block : BasePooling
 {
     public BlockType blockType;
-    private float curHp;
+    [SerializeField] private float curHP;
+    public eSoundName sound;
+    private float maxHP;
+    
     private SpriteRenderer sr;
     private void OnEnable()
     {
@@ -17,8 +20,33 @@ public class Block : BasePooling
 
     public void SetData()
     {
-        curHp = GameData.Instance.blockData.listBlockSprites[(int)blockType].spriteInfo.maxHP;
+        ShotSFX();
+        maxHP = GameData.Instance.blockData.listBlockSprites[(int)blockType].spriteInfo.maxHP;
+        curHP = maxHP;
         sr.sprite = GameData.Instance.blockData.listBlockSprites[(int)blockType].spriteInfo.listSprite[2];
+    }
+
+    public void TakeDamage(float amount)
+    {
+        curHP -= amount;
+        SetSprite();
+        AudioManager.Instance.Shot(sound);
+    }
+
+    public void SetSprite()
+    {
+        if (curHP / maxHP <= 1f / 3)
+        {
+            sr.sprite = GameData.Instance.blockData.listBlockSprites[(int)blockType].spriteInfo.listSprite[0];
+        }
+        else if ( curHP / maxHP <= 2f / 3)
+        {
+            sr.sprite = GameData.Instance.blockData.listBlockSprites[(int)blockType].spriteInfo.listSprite[1];
+        } if (curHP <= 0)
+        {
+            GameMenu.Instance.UpdateScore((int)blockType + 1);
+            Disable();
+        }
     }
 
     // private void OnTriggerEnter2D(Collider2D other)
@@ -36,19 +64,45 @@ public class Block : BasePooling
         {
             other.gameObject.SetActive(false);
         }
-
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            curHp -= 1;
-            
-        }
+        //Của Đạt
+        // if (other.gameObject.CompareTag("Bullet"))
+        // {
+        //     curHP -= 3;
+        //     Debug.Log(curHP);
+        // }
+        //
+        // float curHP_percent = (float)curHP/GameData.Instance.blockData.listBlockSprites[(int)blockType].spriteInfo.maxHP;
+        // if (curHP_percent <= 2.0 / 3 && curHP_percent > 1.0 / 3)
+        // {
+        //     sr.sprite = GameData.Instance.blockData.listBlockSprites[(int)blockType].spriteInfo.listSprite[1];
+        // }
+        // if (curHP_percent <= 1.0 / 3)
+        // {
+        //     sr.sprite = GameData.Instance.blockData.listBlockSprites[(int)blockType].spriteInfo.listSprite[0];
+        // }
+        //
+        // if (curHP <= 0)
+        // {
+        //     gameObject.SetActive(false);
+        // }
         
     }
-
-    private void Update()
+    public void ShotSFX()
     {
-        // curHp -= MaxH
+        if (blockType == BlockType.wood)
+        {
+            sound = eSoundName.Wood_Sound;
+        }
+        else if (blockType == BlockType.metal)
+        {
+            sound = eSoundName.Metal_Sound;
+        }
+        else if (blockType == BlockType.stone)
+        {
+            sound = eSoundName.Stone_Sound;
+        }
     }
+    
     
     
 }

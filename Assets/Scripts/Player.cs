@@ -13,12 +13,15 @@ public class Player : MonoBehaviour
     public float timeShoot = 1.0f;
     public float boundTop = 3.5f;
     public float boundBottom = -4.0f;
+    public eSoundName sound;
+    public BlockType blockType;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(0, 20));
+        AudioManager.Instance.PlayMusic(eMusicName.Game);
         cooldown = timeShoot;
     }
 
@@ -27,6 +30,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            AudioManager.Instance.Shot(eSoundName.Jump);
             rb.velocity = new Vector2(0, jumpForce);
 
             
@@ -47,6 +51,13 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector2(pos.x, boundBottom);
         }
+
+        //Của Đạt
+        // if (gameObject.transform.position.y < -5)
+        // {
+        //     Debug.Log("Death");
+        //     UnityEditor.EditorApplication.isPaused = true;
+        // }
         
         
         
@@ -65,4 +76,14 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Block"))
+        {
+            rb.velocity = new Vector2(0, -30f);
+        }
+    }
+
+    
 }

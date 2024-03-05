@@ -44,12 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
+    highestScore: 0
+    Diamond: 0
+    Gold: 0
     MuteAll: 0
     PushAlarm: 1
     SoundFX: 1
     MusicFX: 1
     Vibration: 1
-  numberOfPlayers: 3
-  isPlayWithBot: 0
-  levelSelect: 0
-  gameName: 
+  blockData: {fileID: 0}
+  bulletData: {fileID: 11400000, guid: 4e500b2bb9614ef4e9b172ea84f7d6b1, type: 2}
+  score: 0

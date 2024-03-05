@@ -26,4 +26,5 @@ public class GameManager : MonoBehaviour
             cooldown -= Time.deltaTime;
         }
     }
+    
 }

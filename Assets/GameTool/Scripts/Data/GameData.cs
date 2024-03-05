@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class GameData : SingletonMonoBehaviour<GameData>
 {
+    
     public GameDataSave Data;
     public BlockData blockData;
+    public BulletData bulletData;
+    public int score = 0;
 
     //[Header("RESOURCE")] 
 
@@ -126,11 +129,22 @@ public class GameData : SingletonMonoBehaviour<GameData>
             SaveData(eData.Vibration, Vibration);
         }
     }
+
+    public int HighestScore
+    {
+        get => Data.highestScore;
+        set
+        {
+            Data.highestScore = value;
+            SaveData(eData.highestScore,HighestScore);
+        }
+    }
 }
 
 [Serializable]
 public class GameDataSave
 {
+    public int highestScore;
     [Header("CURRRENCY")] public int Diamond = 0;
     public int Gold = 0;
     
