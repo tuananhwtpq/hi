@@ -36,12 +36,23 @@ public class Wall : BasePooling
 
         for (int i = 0; i < 4; i++)
         {
-            var blockType = (BlockType)Random.Range(0, 3);
+            BlockType blockType;
+            if (GameData.Instance.score <= 6)
+            {
+                blockType = (BlockType.wood);
+            } else if (GameData.Instance.score <= 15)
+            {
+                blockType = BlockType.stone;
+            } else if (GameData.Instance.score >= 30)
+            {
+                blockType = (BlockType)Random.Range(0, 3);
+            }
+            // var blockType = (BlockType)Random.Range(0, 3);
             var position = transform.position;
             var block = (Block)PoolingManager.Instance.GetObject(NamePrefabPool.Block, 
                 position: new Vector3(position.x, posY[i], position.z), parent:transform);
             //Lỗi sắp xếp sai dòng, phải gán block.blockType = blockType trước sau đó ms truy cập block.SetData();
-            block.blockType = blockType;
+            // block.blockType = blockType;
             block.SetData();
            SpriteRenderer sr = block.gameObject.GetComponent<SpriteRenderer>();
             sr.size = new Vector2(1, height[i]);
@@ -49,8 +60,13 @@ public class Wall : BasePooling
 
             bc.size = sr.size;
             bc.offset = Vector2.zero;
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
             
         }
+        
 
     }
 
@@ -58,6 +74,7 @@ public class Wall : BasePooling
     {
         transform.Translate(new Vector3(-speed *Time.deltaTime, transform.position.y, transform.position.z));
         //transform.position = new Vector3(-speed * Time.deltaTime, transform.position.y, transform.position.z);
+        
         
         
     }

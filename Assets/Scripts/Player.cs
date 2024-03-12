@@ -10,9 +10,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject prefab;
     public float cooldown;
-    public float timeShoot = 1.0f;
-    public float boundTop = 3.5f;
-    public float boundBottom = -4.0f;
+    public float timeShoot = 50.0f;
+    public float boundTop = 4.1f;
+    public float boundBottom = -4.5f;
     public eSoundName sound;
     public BlockType blockType;
     
