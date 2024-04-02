@@ -15,12 +15,16 @@ public class Player : MonoBehaviour
     public float boundBottom = -4.5f;
     public eSoundName sound;
     public BlockType blockType;
+    private Animator anim;
+    
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(0, 20));
+        anim = GetComponent<Animator>();
+        anim.runtimeAnimatorController = GameData.Instance.listAnimators[GameData.Instance.ID];
         AudioManager.Instance.PlayMusic(eMusicName.Game);
         cooldown = timeShoot;
     }
@@ -82,6 +86,12 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Block"))
         {
             rb.velocity = new Vector2(0, -30f);
+        }
+        
+        if (other.gameObject.CompareTag("Block"))
+        {
+            CanvasManager.Instance.Push(eUIName.Dead_Popup);
+            Time.timeScale = 0;
         }
     }
 

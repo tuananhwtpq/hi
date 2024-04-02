@@ -3,7 +3,7 @@ namespace GameTool
     public enum eUIName
     {
         None,
-        HomeMenu,
-        GameMenu,
+        Dead_Popup
+        ,
     }
 }

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: CanvasPrefTable
   m_EditorClassIdentifier: 
   Serializers:
-  - key: HomeMenu
+  - key: Dead_Popup
+    settingUI:
+      uiType: 1
+      baseUI: {fileID: 7064056587654357283, guid: 6520d5f456b4bc94486908671dfcc958, type: 3}
+  - key: 
     settingUI:
       uiType: 0
-      baseUI: {fileID: 43833923370065268, guid: b5156f00dac5bb74884f16e809849a2a, type: 3}
-  - key: GameMenu
-    settingUI:
-      uiType: 0
-      baseUI: {fileID: 6096077471740869247, guid: ca433eb5a65788d4ba6210ea47324cd3, type: 3}
+      baseUI: {fileID: 0}

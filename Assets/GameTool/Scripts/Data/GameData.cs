@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using GameTool;
 using UnityEngine;
 
 public class GameData : SingletonMonoBehaviour<GameData>
 {
-    
+    public List<RuntimeAnimatorController> listAnimators;
     public GameDataSave Data;
     public BlockData blockData;
     public BulletData bulletData;
@@ -139,11 +140,22 @@ public class GameData : SingletonMonoBehaviour<GameData>
             SaveData(eData.highestScore,HighestScore);
         }
     }
+    public int ID
+    {
+        get => Data.id;
+        set
+        {
+            Data.id = value;
+            // SaveData(eData.highestScore,HighestScore);
+        }
+    }
+    
 }
 
 [Serializable]
 public class GameDataSave
 {
+    public int id;
     public int highestScore;
     [Header("CURRRENCY")] public int Diamond = 0;
     public int Gold = 0;
